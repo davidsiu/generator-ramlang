@@ -3,7 +3,7 @@ angular.module('<%= app.name %>')
 /**
  * This provider is used as the main interface for communicating with RESTful web resources.
  */
-.provider('Api', function() {
+.provider('<%= provider.name %>', function() {
   var self = this;
   var baseApiUrl = null;
   var suffix = '';
@@ -145,6 +145,6 @@ angular.module('<%= app.name %>')
 /**
  * Sets up the api base url.
  */
-.config(['ApiProvider', function(ApiProvider) {
-  ApiProvider.setApiBaseUrl('<%= app.baseUri %>');
+.config(['<%= provider.name %>Provider', function(<%= provider.name %>Provider) {
+ <%= provider.name %>Provider.setApiBaseUrl('<%= app.baseUri %>');
 }])<% } %>
