@@ -1,7 +1,7 @@
 angular.module('<%= app.name %>')
 
 <%= resource.description %>
-.factory('<%= resource.displayName %>', ['Api', function(Api) {
+.factory('<%= resource.displayName %>', ['<%= provider.name %>', function(<%= provider.name %>) {
   return {
 <%= resource.methods %>
   };

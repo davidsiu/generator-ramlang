@@ -76,6 +76,7 @@ Generator.prototype.config = function() {
   // load up any saved configurations if the user hasn't provided the 'clean' argument
   if (this.config.existed && !this.options.clean) {
     this.apiModuleName      = this.config.get('apiModuleName');
+    this.apiProviderName    = this.config.get('apiProviderName');
     this.ramlFilename       = this.config.get('ramlPath');
     this.selectedResources  = this.config.get('selectedResources');
     this.generateInOneFile  = this.config.get('allInOneFile');
@@ -404,6 +405,7 @@ Generator.prototype.generate = function() {
 
   var fileContents = '\'use strict\';\n\n';
   var moduleName = this.apiModuleName + (this.apiModuleName != 'api' ? '-api' : '');
+  var providerName = (this.apiProviderName || '') + 'Api';
 
   /**
    * A helper function to direct the resolved template text into a file or append it to a variable.
@@ -422,13 +424,13 @@ Generator.prototype.generate = function() {
   };
 
   var appTemplateText = application.generate(moduleName, this.ramlSpecObj);
-  var providerTemplateText = provider.generate(moduleName, this.ramlSpecObj, !this.generateInOneFile);
+  var providerTemplateText = provider.generate(moduleName, providerName, this.ramlSpecObj, !this.generateInOneFile);
 
   this.writeTemplateToDest(moduleName, appTemplateText);
   this.writeTemplateToDest('api-provider', providerTemplateText);
 
   this.selectedResourceObjs.forEach(function(resource) {
-    var serviceTemplateText = service.generate(moduleName, resource, !this.generateInOneFile, this.mediaTypeExtension);
+    var serviceTemplateText = service.generate(moduleName, providerName, resource, !this.generateInOneFile, this.mediaTypeExtension);
     this.writeTemplateToDest(resource.displayName, serviceTemplateText);
   }, this);
 
