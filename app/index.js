@@ -357,7 +357,7 @@ Generator.prototype.finalQuestions = function() {
       prompts.push(prompt2);
     }
 
-    if (!this.generateInOneFile) {
+    if (this.generateInOneFile === '' || this.generateInOneFile === undefined) {
       prompts.push(prompt3);
     }
 
@@ -427,7 +427,7 @@ Generator.prototype.generate = function() {
   var providerTemplateText = provider.generate(moduleName, providerName, this.ramlSpecObj, !this.generateInOneFile);
 
   this.writeTemplateToDest(moduleName, appTemplateText);
-  this.writeTemplateToDest('api-provider', providerTemplateText);
+  this.writeTemplateToDest(providerName + '-provider', providerTemplateText);
 
   this.selectedResourceObjs.forEach(function(resource) {
     var serviceTemplateText = service.generate(moduleName, providerName, resource, !this.generateInOneFile, this.mediaTypeExtension);
