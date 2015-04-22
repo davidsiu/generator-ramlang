@@ -41,6 +41,14 @@ var Generator = module.exports = function Generator() {
     required: false
   });
 
+  this.option('configfile', {
+    desc: 'Path to the .ramlang config file to use.',
+    required: false,
+    optional: true,
+    type: String,
+    defaults: './.ramlang'
+  });
+
   /**
    * Gets the list of raml files in the current working directory.
    */
@@ -59,8 +67,10 @@ util.inherits(Generator, yeoman.generators.Base);
  * Loads the config file if there is one.
  */
 Generator.prototype.config = function() {
+
   // Initialise the yeoman config for this generator
-  this.config.path = './.ramlang';
+  this.config.path = this.options['configfile'];
+
   this.config.loadConfig();
 
   // load up any saved configurations if the user hasn't provided the 'clean' argument
