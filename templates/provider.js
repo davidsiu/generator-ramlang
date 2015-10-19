@@ -115,6 +115,18 @@ angular.module('<%= app.name %>')
       },
 
       /**
+       * Calls the api with the patch http verb sending the data object provided with the request.
+       *
+       * @param {String} resourceName The name of the resource to call.
+       * @param {Number} id The id of the resource.
+       * @param {Object} data The object to post with the request.
+       * @returns {Object} The promise object which made the request.
+       */
+      patch: function(resourceName, id, data) {
+        return callApi('PATCH', resourceName, id, null, data);
+      },
+
+      /**
        * Calls the api with the put http verb sending the data object provided with the request.
        *
        * @param {String} resourceName The name of the resource to call.
