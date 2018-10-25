@@ -21,7 +21,9 @@
     "node": ">=0.10.0"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "files": [
     "app",
@@ -45,12 +47,14 @@
     "lodash": "^2.4.1",
     "markdown": "^0.5.0",
     "raml-parser": "^0.8.7",
-    "yeoman-generator": "^0.16.0"
+    "yeoman-generator": "^0.21.0",
+    "snyk": "^1.105.0"
   },
   "devDependencies": {
     "mocha": "*"
   },
   "peerDependencies": {
     "yo": ">=1.0.0"
-  }
+  },
+  "snyk": true
 }
